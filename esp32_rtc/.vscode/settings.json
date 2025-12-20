@@ -1,0 +1,8 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "idf.espIdfPath": "/Users/tongo/esp/esp-idf",
+  "idf.toolsPath": "/Users/tongo/.espressif",
+  "idf.pythonInstallPath": "/usr/bin/python3",
+  "idf.flashType": "UART",
+  "idf.port": "/dev/tty.SLAB_USBtoUART"
+}
