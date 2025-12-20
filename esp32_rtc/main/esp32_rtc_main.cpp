@@ -23,9 +23,8 @@ extern "C" void app_main(void)
     localtime_r(&now, &timeinfo);
     
     // Configurazione ora ESP da RTC module
-    printf("Time out of date -> update with build time");
-    time_t build_time = rtc.getBuildTimestamp();
-    rtc.setModuleTimestamp(build_time);
+    printf("Init timestamp");
+    rtc.setModuleTimestamp(rtc.getInitialTimestamp());
     rtc.setEspTime();
     
     struct timeval tv;

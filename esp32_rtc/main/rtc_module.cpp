@@ -24,6 +24,17 @@ RtcModule::RtcModule() {
 RtcModule::~RtcModule() {
 }
 
+time_t RtcModule::getInitialTimestamp() {
+    struct tm time_tm = {
+        .tm_sec = 0,
+        .tm_min = 0,
+        .tm_hour = 10,
+        .tm_mday = 1,
+        .tm_mon = 0,
+        .tm_year = 2025 - 1900
+    };
+    return mktime(&time_tm);
+}
 time_t RtcModule::getBuildTimestamp() {
     struct tm build_tm = {0};
     char month_str[4];

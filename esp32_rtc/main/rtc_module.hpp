@@ -12,6 +12,7 @@ public:
     RtcModule();
     virtual ~RtcModule();
 
+    time_t getInitialTimestamp();
     time_t getBuildTimestamp();
     time_t getModuleTimestamp();
     void setModuleTimestamp(time_t time);
