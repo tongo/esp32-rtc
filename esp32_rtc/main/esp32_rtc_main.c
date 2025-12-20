@@ -23,9 +23,6 @@ void app_main(void)
         .scl_io_num = GPIO_NUM_22,
         .sda_io_num = GPIO_NUM_21,
         .glitch_ignore_cnt = 7,
-        // The DS3231 **requires** pullup resistors on all of its I/O pins. 
-        // Note: Some DS3231 boards have pullup resistors as part
-        // of their design.
         .flags.enable_internal_pullup = true,
     };
     i2c_new_master_bus(&i2c_mst_config, bus_handle);
@@ -38,17 +35,18 @@ void app_main(void)
     now = ds3231_time_unix_get(rtc_handle);
     localtime_r(&now, &timeinfo);
     
-    if (timeinfo.tm_year + 1900 < 2025) {
-        printf("Time out of date -> update with build time");
-        time_t build_time = get_build_time();
-        ds3231_time_time_t_set(rtc_handle, build_time);
-    }
+    // Configurazione ora ESP da RTC module
+    printf("Time out of date -> update with build time");
+    time_t build_time = get_build_time();
+    ds3231_time_time_t_set(rtc_handle, build_time);
+    ds3231_set_esp_with_rtc(rtc_handle);
     
+    struct timeval tv;
     for (;;) {
-        now = ds3231_time_unix_get(rtc_handle);
-        localtime_r(&now, &timeinfo);
+        gettimeofday(&tv, NULL);
+        localtime_r(&tv.tv_sec, &timeinfo);
         strftime(strftime_buf, sizeof(strftime_buf), "%c", &timeinfo);
-        printf("The current time from the DS3231 RTC moldue is: %s\n", strftime_buf);
+        printf("The current time (from ESP32): %s - %ld\n", strftime_buf, (long)tv.tv_usec);
 
         float temp = ds3231_temperature_get(rtc_handle);
         printf("Temperature: %f\n", temp);
