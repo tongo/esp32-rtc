@@ -69,8 +69,16 @@ void RtcModule::setModuleTimestamp(time_t time) {
     ds3231_time_time_t_set(_rtc_handle, time);
 }   
 
-void RtcModule::setEspTime() {
+void RtcModule::setEspTimestamp() {
     ds3231_set_esp_with_rtc(_rtc_handle);
+}
+
+tm RtcModule::getEspTimestamp() {
+    tm time;
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    localtime_r(&tv.tv_sec, &time);
+    return time;
 }
 
 float RtcModule::getTemperature() {

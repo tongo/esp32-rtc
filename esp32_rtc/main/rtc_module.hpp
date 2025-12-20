@@ -16,7 +16,8 @@ public:
     time_t getBuildTimestamp();
     time_t getModuleTimestamp();
     void setModuleTimestamp(time_t time);
-    void setEspTime();
+    void setEspTimestamp();
+    tm getEspTimestamp();
 
     float getTemperature();
     
