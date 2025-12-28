@@ -1,5 +1,4 @@
-#ifndef HTTP_SERVER_HPP
-#define HTTP_SERVER_HPPs
+#pragma once
 
 #include "rtc_module.hpp"
 #include "esp_http_server.h"
@@ -26,5 +25,3 @@ private:
     static esp_err_t get_updatetimestamp_handler(httpd_req_t *req);
     esp_err_t handleGetUpdateTimestampContent(httpd_req_t *req);
 };
-
-#endif // HTTP_SERVER_HPP

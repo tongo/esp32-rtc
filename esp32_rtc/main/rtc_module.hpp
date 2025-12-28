@@ -1,5 +1,4 @@
-#ifndef RTC_MODULE_HPP
-#define RTC_MODULE_HPP
+#pragma once
 
 #include <sys/time.h>
 #include "esp-idf-ds3231.h"
@@ -25,5 +24,3 @@ private:
     i2c_master_bus_handle_t _bus_handle;
     rtc_handle_t* _rtc_handle;
 };
-
-#endif // RTC_MODULE_HPP
